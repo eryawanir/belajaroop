@@ -20,5 +20,8 @@ $produk1->judul = "Naruto";
 $produk2 = new Produk;
 $produk2->judul = "Counter Strike";
 
+//bikin properti baru
+$produk2->propertiBaru = "isi Properti Baru";
+
 var_dump($produk1, $produk2);
 var_dump($produk1, $produk2);
