@@ -3,7 +3,7 @@
 
 /* Membuat Penjualan Produk
     - Game
-    - Film
+    - Komik
 */
 
 class Produk
