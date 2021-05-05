@@ -8,13 +8,13 @@
 
 class Produk
 {
-    public $judul = "judul kosong",
-        $penulis = "tidak diketahui",
-        $penerbit = "ga ada",
-        $harga = 0;
+    public $judul,
+        $penulis,
+        $penerbit,
+        $harga;
 
     //constructor
-    public function __construct($judul, $penulis, $penerbit, $harga)
+    public function __construct($judul = "judul kosong", $penulis, $penerbit, $harga)
     {
         $this->judul = $judul;
         $this->penulis = $penulis;
