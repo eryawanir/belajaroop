@@ -21,3 +21,4 @@ $produk2 = new Produk;
 $produk2->judul = "Counter Strike";
 
 var_dump($produk1, $produk2);
+fdghjkldfgh;
