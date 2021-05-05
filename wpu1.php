@@ -14,14 +14,11 @@ class Produk
         $harga = 0;
 };
 
-$produk1 = new Produk;
-$produk1->judul = "Naruto";
+//buat objek yg lengkap
+$produk3 = new Produk();
+$produk3->judul = "Naruto";
+$produk3->penulis = "ya penulisnya naruto";
+$produk3->penerbit = "Shonen";
+$produk3->harga = "30000";
 
-$produk2 = new Produk;
-$produk2->judul = "Counter Strike";
-
-//bikin properti baru
-$produk2->propertiBaru = "isi Properti Baru";
-
-var_dump($produk1, $produk2);
-var_dump($produk1, $produk2);
+echo "Komik : $produk3->penulis, $produk3->penerbit";
