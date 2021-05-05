@@ -27,4 +27,11 @@ $produk3->penerbit = "Shonen";
 $produk3->harga = "30000";
 echo $produk3->cetakLabel();
 
-echo "Komik : $produk3->penulis, $produk3->penerbit";
+echo "<hr>";
+
+$produk4 = new Produk();
+$produk4->judul = "Counter Strike";
+$produk4->penulis = "ya yg bikin cs";
+$produk4->penerbit = "Valve";
+$produk4->harga = 40000;
+echo $produk4->cetakLabel();
