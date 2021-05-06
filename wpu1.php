@@ -14,14 +14,12 @@ class Produk
         $harga;
 
     //constructor
-    public function __construct($judul = "judul kosong", $penulis, $penerbit, $harga, $halaman, $durasi)
+    public function __construct($judul, $penulis, $penerbit, $harga)
     {
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
-        $this->halaman = $halaman;
-        $this->durasi = $durasi;
     }
 
     public function cetakLabel()
@@ -41,6 +39,12 @@ class Produk
 
 class Komik extends Produk
 {
+    public $halaman;
+    public function __construct($judul, $penulis, $penerbit, $harga, $halaman)
+    {
+        parent::__construct($judul, $penulis, $penerbit, $harga);
+        $this->halaman = $halaman;
+    }
     public function cetakSemua()
     {
         $str = "Komik : " . parent::cetakSemua() . " ~ {$this->halaman} Halaman.";
@@ -50,6 +54,12 @@ class Komik extends Produk
 
 class Game extends Produk
 {
+    public $durasi;
+    public function __construct($judul, $penulis, $penerbit, $harga, $durasi)
+    {
+        parent::__construct($judul, $penulis, $penerbit, $harga);
+        $this->durasi = $durasi;
+    }
     public function cetakSemua()
     {
         $str = "Game : " . parent::cetakSemua() . " - {$this->durasi} Jam.";
@@ -68,8 +78,8 @@ class CetakInfoProduk
 }
 
 //buat objek yg lengkap
-$produk1 = new Komik("Naruto", "Penulisnya Naruto", "Shonen", 30000, 100, 0);
-$produk2 = new Game("Counter Strike", "Pembuat Counterstrike", "Valve", 40000, 0, 50);
+$produk1 = new Komik("Naruto", "Penulisnya Naruto", "Shonen", 30000, 100);
+$produk2 = new Game("Counter Strike", "Pembuat Counterstrike", "Valve", 40000, 50);
 
 // Komik : Naruto | Penulisnya Naruto, Shonen (Rp. 30000) - 100 Halaman.
 // Game : Counter Strike | Pembuat Counterstrike, Valve (Rp. 40000) ~ 50 Jam.
