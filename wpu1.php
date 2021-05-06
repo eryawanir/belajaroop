@@ -43,8 +43,7 @@ class Komik extends Produk
 {
     public function cetakSemua()
     {
-        $infoProduk = new CetakInfoProduk;
-        $str = "Komik : {$infoProduk->cetak($this)} ~ {$this->halaman} Halaman.";
+        $str = "Komik : " . parent::cetakSemua() . " ~ {$this->halaman} Halaman.";
         return $str;
     }
 }
@@ -53,8 +52,7 @@ class Game extends Produk
 {
     public function cetakSemua()
     {
-        $infoProduk = new CetakInfoProduk;
-        $str = "Game : {$infoProduk->cetak($this)} - {$this->durasi} Jam.";
+        $str = "Game : " . parent::cetakSemua() . " - {$this->durasi} Jam.";
         return $str;
     }
 }
