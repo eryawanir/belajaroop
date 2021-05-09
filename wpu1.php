@@ -6,12 +6,18 @@
     - Komik
 */
 
+/* visibility -> property dan method
+@public dapat digunakan dimana saja
+@protected hanya dapat digunakan di dalam kelas beserta turunanya
+@private hanya didalam kelas tertentu saja
+*/
 class Produk
 {
     public $judul,
         $penulis,
         $penerbit,
-        $harga;
+        $diskon = 0;
+    protected $harga;
 
     //constructor
     public function __construct($judul, $penulis, $penerbit, $harga)
@@ -47,7 +53,7 @@ class Komik extends Produk
     }
     public function cetakSemua()
     {
-        $str = "Komik : " . parent::cetakSemua() . " ~ {$this->halaman} Halaman.";
+        $str = "Komik : " . parent::cetakSemua() . " (Rp. {$this->harga}) ~ {$this->halaman} Halaman.";
         return $str;
     }
 }
@@ -60,9 +66,13 @@ class Game extends Produk
         parent::__construct($judul, $penulis, $penerbit, $harga);
         $this->durasi = $durasi;
     }
+    public function cetakHargaProtected()
+    {
+        return $this->harga;
+    }
     public function cetakSemua()
     {
-        $str = "Game : " . parent::cetakSemua() . " - {$this->durasi} Jam.";
+        $str = "Game : " . parent::cetakSemua() . " (Rp. {$this->harga}) - {$this->durasi} Jam.";
         return $str;
     }
 }
@@ -72,7 +82,7 @@ class CetakInfoProduk
 {   //harus objek dari kelas Produk=======(objek type)===================================
     public function cetak(Produk $produk)
     {
-        $str = "{$produk->judul} | {$produk->cetakLabel()} (Rp. {$produk->harga})";
+        $str = "{$produk->judul} | {$produk->cetakLabel()}";
         return $str;
     }
 }
@@ -87,3 +97,5 @@ $produk2 = new Game("Counter Strike", "Pembuat Counterstrike", "Valve", 40000, 5
 echo $produk1->cetakSemua();
 echo "<br>";
 echo $produk2->cetakSemua();
+echo "<hr>";
+echo $produk2->cetakHargaProtected();
