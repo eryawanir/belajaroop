@@ -13,12 +13,12 @@
 */
 class Produk
 {
-    public $judul,
+    private $judul,
         $penulis,
-        $penerbit;
+        $penerbit,
+        $harga,
+        $diskon;
 
-    protected $diskon;
-    private $harga;
 
     //constructor
     public function __construct($judul, $penulis, $penerbit, $harga)
@@ -29,14 +29,65 @@ class Produk
         $this->harga = $harga;
     }
 
-    public function harga()
+
+
+
+    public function getJudul()
+    {
+        return $this->judul;
+    }
+    public function setJudul($judul)
+    {
+        if (!is_string($judul)) {
+            throw new Exception("Judul harus string");
+        }
+        $this->judul = $judul;
+    }
+
+
+    public function getPenulis()
+    {
+        return $this->penulis;
+    }
+    public function setPenulis($penulis)
+    {
+        $this->penulis = $penulis;
+    }
+
+
+    public function getPenerbit()
+    {
+        return $this->penerbit;
+    }
+    public function setPenerbit($penerbit)
+    {
+        $this->penerbit = $penerbit;
+    }
+
+
+    public function getHarga()
     {
         return $this->harga;
+    }
+    public function setHarga($harga)
+    {
+        $this->harga = $harga;
     }
     public function cekHarga()
     {
         return $this->harga - ($this->harga * $this->diskon / 100);
     }
+
+
+    public function setDiskon($diskon)
+    {
+        $this->diskon = $diskon;
+    }
+    public function getDiskon()
+    {
+        return $this->diskon;
+    }
+
 
     public function cetakLabel()
     {
@@ -63,12 +114,8 @@ class Komik extends Produk
     }
     public function cetakSemua()
     {
-        $str = "Komik : " . parent::cetakSemua() . " (Rp. " . $this->harga() . ") ~ {$this->halaman} Halaman.";
+        $str = "Komik : " . parent::cetakSemua() . " (Rp. " . $this->getHarga() . ") ~ {$this->halaman} Halaman.";
         return $str;
-    }
-    public function setDiskon($diskon)
-    {
-        $this->diskon = $diskon;
     }
 }
 
@@ -82,11 +129,11 @@ class Game extends Produk
     }
     public function cetakHargaProtected()
     {
-        return $this->harga();
+        return $this->getHarga();
     }
     public function cetakSemua()
     {
-        $str = "Game : " . parent::cetakSemua() . " (Rp. " . $this->harga() . ") - {$this->durasi} Jam.";
+        $str = "Game : " . parent::cetakSemua() . " (Rp. " . $this->getHarga() . ") - {$this->durasi} Jam.";
         return $str;
     }
 }
@@ -96,7 +143,7 @@ class CetakInfoProduk
 {   //harus objek dari kelas Produk=======(objek type)===================================
     public function cetak(Produk $produk)
     {
-        $str = "{$produk->judul} | {$produk->cetakLabel()}";
+        $str = $produk->getJudul() . " | {$produk->cetakLabel()}";
         return $str;
     }
 }
@@ -117,3 +164,6 @@ echo "<hr>";
 $produk1->setDiskon(10);
 var_dump($produk1);
 echo $produk1->cekHarga();
+
+echo "<hr>";
+echo $produk1->getPenerbit();
