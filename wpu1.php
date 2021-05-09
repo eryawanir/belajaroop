@@ -15,9 +15,10 @@ class Produk
 {
     public $judul,
         $penulis,
-        $penerbit,
-        $diskon = 0;
-    protected $harga;
+        $penerbit;
+
+    protected $diskon;
+    private $harga;
 
     //constructor
     public function __construct($judul, $penulis, $penerbit, $harga)
@@ -27,9 +28,10 @@ class Produk
         $this->penerbit = $penerbit;
         $this->harga = $harga;
     }
-    public function setDiskon($diskon)
+
+    public function harga()
     {
-        $this->diskon = $diskon;
+        return $this->harga;
     }
     public function cekHarga()
     {
@@ -61,8 +63,12 @@ class Komik extends Produk
     }
     public function cetakSemua()
     {
-        $str = "Komik : " . parent::cetakSemua() . " (Rp. {$this->harga}) ~ {$this->halaman} Halaman.";
+        $str = "Komik : " . parent::cetakSemua() . " (Rp. " . $this->harga() . ") ~ {$this->halaman} Halaman.";
         return $str;
+    }
+    public function setDiskon($diskon)
+    {
+        $this->diskon = $diskon;
     }
 }
 
@@ -76,11 +82,11 @@ class Game extends Produk
     }
     public function cetakHargaProtected()
     {
-        return $this->harga;
+        return $this->harga();
     }
     public function cetakSemua()
     {
-        $str = "Game : " . parent::cetakSemua() . " (Rp. {$this->harga}) - {$this->durasi} Jam.";
+        $str = "Game : " . parent::cetakSemua() . " (Rp. " . $this->harga() . ") - {$this->durasi} Jam.";
         return $str;
     }
 }
@@ -106,6 +112,8 @@ echo $produk1->cetakSemua();
 echo "<br>";
 echo $produk2->cetakSemua();
 echo "<hr>";
-echo $produk2->cetakHargaProtected();
+
+
 $produk1->setDiskon(10);
+var_dump($produk1);
 echo $produk1->cekHarga();
