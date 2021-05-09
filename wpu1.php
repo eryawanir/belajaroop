@@ -27,6 +27,14 @@ class Produk
         $this->penerbit = $penerbit;
         $this->harga = $harga;
     }
+    public function setDiskon($diskon)
+    {
+        $this->diskon = $diskon;
+    }
+    public function cekHarga()
+    {
+        return $this->harga - ($this->harga * $this->diskon / 100);
+    }
 
     public function cetakLabel()
     {
@@ -99,3 +107,5 @@ echo "<br>";
 echo $produk2->cetakSemua();
 echo "<hr>";
 echo $produk2->cetakHargaProtected();
+$produk1->setDiskon(10);
+echo $produk1->cekHarga();
