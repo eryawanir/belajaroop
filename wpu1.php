@@ -11,7 +11,7 @@
 @protected hanya dapat digunakan di dalam kelas beserta turunanya
 @private hanya didalam kelas tertentu saja
 */
-class Produk
+abstract class Produk
 {
     private $judul,
         $penulis,
@@ -94,7 +94,9 @@ class Produk
         return "$this->penulis, $this->penerbit";
     }
 
-    public function cetakSemua()
+    abstract public function cetakSemua();
+
+    public function cetakSemuaInfo()
     {
         $infoProduk = new CetakInfoProduk;
         $str = $infoProduk->cetak($this);
@@ -102,6 +104,14 @@ class Produk
         return $str;
     }
 };
+class CetakInfoProduk
+{   //harus objek dari kelas Produk=======(objek type)===================================
+    public function cetak(Produk $produk)
+    {
+        $str = $produk->getJudul() . " | {$produk->cetakLabel()}";
+        return $str;
+    }
+}
 
 
 class Komik extends Produk
@@ -114,7 +124,7 @@ class Komik extends Produk
     }
     public function cetakSemua()
     {
-        $str = "Komik : " . parent::cetakSemua() . " (Rp. " . $this->getHarga() . ") ~ {$this->halaman} Halaman.";
+        $str = "Komik : " . $this->cetakSemuaInfo() . " (Rp. " . $this->getHarga() . ") ~ {$this->halaman} Halaman.";
         return $str;
     }
 }
@@ -133,21 +143,32 @@ class Game extends Produk
     }
     public function cetakSemua()
     {
-        $str = "Game : " . parent::cetakSemua() . " (Rp. " . $this->getHarga() . ") - {$this->durasi} Jam.";
+        $str = "Game : " . $this->cetakSemuaInfo() . " (Rp. " . $this->getHarga() . ") - {$this->durasi} Jam.";
         return $str;
     }
 }
 
 
-class CetakInfoProduk
-{   //harus objek dari kelas Produk=======(objek type)===================================
-    public function cetak(Produk $produk)
+
+
+class CetakInfoProdukArray
+{
+    public $daftarProduk = [];
+    public function tambahProduk($produk)
     {
-        $str = $produk->getJudul() . " | {$produk->cetakLabel()}";
+        $this->daftarProduk[] = $produk;
+    }
+    public function cetak()
+    {
+        $str = "DAFTAR INFO PRODUK<br>";
+
+        foreach ($this->daftarProduk as $produk) {
+            $str .= "-{$produk->cetakSemua()}<br>";
+        }
+
         return $str;
     }
 }
-
 //buat objek yg lengkap
 $produk1 = new Komik("Naruto", "Penulisnya Naruto", "Shonen", 30000, 100);
 $produk2 = new Game("Counter Strike", "Pembuat Counterstrike", "Valve", 40000, 50);
@@ -167,3 +188,11 @@ echo $produk1->cekHarga();
 
 echo "<hr>";
 echo $produk1->getPenerbit();
+echo "<hr>";
+echo "<hr>";
+
+$percetakan1 = new CetakInfoProdukArray;
+$percetakan1->tambahProduk($produk1);
+$percetakan1->tambahProduk($produk2);
+var_dump($percetakan1);
+echo $percetakan1->cetak();
