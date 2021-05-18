@@ -11,7 +11,13 @@
 @protected hanya dapat digunakan di dalam kelas beserta turunanya
 @private hanya didalam kelas tertentu saja
 */
-abstract class Produk
+interface infoProduk
+{
+    public function cetakSemua();
+}
+
+
+abstract class Produk1
 {
     private $judul,
         $penulis,
@@ -94,19 +100,11 @@ abstract class Produk
         return "$this->penulis, $this->penerbit";
     }
 
-    abstract public function cetakSemua();
-
-    public function cetakSemuaInfo()
-    {
-        $infoProduk = new CetakInfoProduk;
-        $str = $infoProduk->cetak($this);
-
-        return $str;
-    }
+    abstract public function cetakSemuaInfo();
 };
 class CetakInfoProduk
 {   //harus objek dari kelas Produk=======(objek type)===================================
-    public function cetak(Produk $produk)
+    public function cetak(Produk1 $produk)
     {
         $str = $produk->getJudul() . " | {$produk->cetakLabel()}";
         return $str;
@@ -114,7 +112,7 @@ class CetakInfoProduk
 }
 
 
-class Komik extends Produk
+class Komik extends Produk1 implements infoProduk
 {
     public $halaman;
     public function __construct($judul, $penulis, $penerbit, $harga, $halaman)
@@ -127,9 +125,16 @@ class Komik extends Produk
         $str = "Komik : " . $this->cetakSemuaInfo() . " (Rp. " . $this->getHarga() . ") ~ {$this->halaman} Halaman.";
         return $str;
     }
+    public function cetakSemuaInfo()
+    {
+        $infoProduk = new CetakInfoProduk;
+        $str = $infoProduk->cetak($this);
+
+        return $str;
+    }
 }
 
-class Game extends Produk
+class Game extends Produk1 implements infoProduk
 {
     public $durasi;
     public function __construct($judul, $penulis, $penerbit, $harga, $durasi)
@@ -146,6 +151,13 @@ class Game extends Produk
         $str = "Game : " . $this->cetakSemuaInfo() . " (Rp. " . $this->getHarga() . ") - {$this->durasi} Jam.";
         return $str;
     }
+    public function cetakSemuaInfo()
+    {
+        $infoProduk = new CetakInfoProduk;
+        $str = $infoProduk->cetak($this);
+
+        return $str;
+    }
 }
 
 
@@ -154,7 +166,7 @@ class Game extends Produk
 class CetakInfoProdukArray
 {
     public $daftarProduk = [];
-    public function tambahProduk(Produk $produk)
+    public function tambahProduk(Produk1 $produk)
     {
         $this->daftarProduk[] = $produk;
     }
