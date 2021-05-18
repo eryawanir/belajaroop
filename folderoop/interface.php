@@ -11,7 +11,7 @@
 @protected hanya dapat digunakan di dalam kelas beserta turunanya
 @private hanya didalam kelas tertentu saja
 */
-interface infoProduk
+interface InfoProduk
 {
     public function cetakSemua();
 }
@@ -112,7 +112,7 @@ class CetakInfoProduk
 }
 
 
-class Komik extends Produk1 implements infoProduk
+class Komik extends Produk1 implements InfoProduk
 {
     public $halaman;
     public function __construct($judul, $penulis, $penerbit, $harga, $halaman)
@@ -134,7 +134,7 @@ class Komik extends Produk1 implements infoProduk
     }
 }
 
-class Game extends Produk1 implements infoProduk
+class Game extends Produk1 implements InfoProduk
 {
     public $durasi;
     public function __construct($judul, $penulis, $penerbit, $harga, $durasi)
