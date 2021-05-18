@@ -154,7 +154,7 @@ class Game extends Produk
 class CetakInfoProdukArray
 {
     public $daftarProduk = [];
-    public function tambahProduk($produk)
+    public function tambahProduk(Produk $produk)
     {
         $this->daftarProduk[] = $produk;
     }
