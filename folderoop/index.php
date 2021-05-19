@@ -28,3 +28,11 @@ $percetakan1->tambahProduk($produk1);
 $percetakan1->tambahProduk($produk2);
 var_dump($percetakan1);
 echo $percetakan1->cetak();
+
+use App\Produk\User as ProdukUser;
+use App\Service\User as ServiceUser;
+
+echo "<br>";
+new ProdukUser();
+echo "<br>";
+new ServiceUser();
